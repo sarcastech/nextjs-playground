@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {FC, useState} from 'react'
 import Layout from '../components/Layout'
 import Row from '../components/Row'
 import RowModel from '../interfaces/Row'
@@ -22,7 +22,7 @@ function buildRowModel (id=0, order=0): RowModel {
   }
 }
 
-function Editor () {
+const Editor: FC = () => {
   let [rows, setRows] = useState([])
 
   function addRow (): void {
@@ -31,7 +31,7 @@ function Editor () {
     setRows(newRows)
   }
 
-  function updateRow (id: number) {
+  function updateRow (id: number): Function {
     return function (): void {
       let  _rows: RowModel[] = rows.slice()
       let matchIndex = _rows.findIndex(row => {
@@ -48,7 +48,7 @@ function Editor () {
     }
   }
 
-  function removeRow (id: number) {
+  function removeRow (id: number): Function {
     return function (): void {
       let newRows = rows.filter((row: RowModel) => {
         return row.id !== id
@@ -58,7 +58,7 @@ function Editor () {
     }
   }
 
-  function renderRows (list: RowModel[]) {
+  function renderRows (list: RowModel[]): JSX.Element[] {
     return list.map(item => {
       let _id = item.id
       return (

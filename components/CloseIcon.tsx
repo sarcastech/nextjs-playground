@@ -1,10 +1,11 @@
+import {FC} from 'react'
 import sass from './Column.module.scss'
 
 type IconProps = {
   onClick: any
 }
 
-function CloseIcon ({onClick}: IconProps) {
+const CloseIcon: FC<IconProps> = ({onClick}) => {
   return (
     <span onClick={onClick} className={sass.cancel}>
       X

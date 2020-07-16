@@ -1,3 +1,4 @@
+import {FC} from 'react'
 import CloseIcon from './CloseIcon'
 import sass from './Column.module.scss'
 
@@ -10,7 +11,7 @@ type ColumnProps = {
   removeColumn: any
 }
 
-function Column ({id, rowId, content, removeColumn}: ColumnProps) {
+const Column: FC<ColumnProps> = ({id, rowId, content, removeColumn}) => {
 
   function handleClick (e: Event): void {
     e.stopPropagation()

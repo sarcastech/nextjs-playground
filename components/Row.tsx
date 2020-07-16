@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {FC, useState} from 'react'
 import Column from './Column'
 import ColumnInterface from '../interfaces/Column'
 import sass from './Rows.module.scss'
@@ -7,26 +7,26 @@ type RowProps = {
   id: number,
   order: number,
   editMode: boolean,
-  columns: any,
+  columns: ColumnInterface[],
   onUpdate: any,
   removeColumn: any,
   removeRow: any
 }
 
-function Row ({id, columns, onUpdate, removeColumn, removeRow}: RowProps) {
+const Row: FC<RowProps> = ({id, columns, onUpdate, removeColumn, removeRow}) => {
   let [showMenu, setShowMenu] = useState(false)
 
-  function launchMenu (): void {
+  function toggleMenu (): void {
     setShowMenu(!showMenu)
   }
 
-  function renderCols (list: any[]): any[] {
+  function renderCols (list: ColumnInterface[]): JSX.Element[] {
     return list.map((item: ColumnInterface) => {
       return <Column key={item.id} {...item} removeColumn={removeColumn} />
     })
   }
 
-  function renderMenu () {
+  function renderMenu (): JSX.Element {
     return (
       <div style={{color: '#fff', background: '#666'}}>
         Menu
@@ -40,7 +40,7 @@ function Row ({id, columns, onUpdate, removeColumn, removeRow}: RowProps) {
   return (
     <div>
       {showMenu ? renderMenu() : false}
-      <div onClick={launchMenu} className={`${sass.row} ${sass.editMode}`}>
+      <div onClick={toggleMenu} className={`${sass.row} ${sass.editMode}`}>
         {renderCols(columns)}
       </div>
     </div>
