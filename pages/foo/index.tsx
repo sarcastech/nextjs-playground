@@ -1,11 +1,27 @@
 import Layout from '../../components/Layout'
 import {useEffect, useState} from 'react'
 import Button from '@material-ui/core/Button'
+import useSWR from 'swr'
 import styles from './foo.module.scss'
 import styled from 'styled-components'
 
 interface EvObj {
   target: Object
+}
+
+interface Col {
+  id: number,
+  rowId: number,
+  order: number,
+  editMode: boolean,
+  content: string
+}
+
+interface Row {
+  id: number,
+  order: number,
+  editMode: boolean,
+  columns: Col[]
 }
 
 let theme = {
@@ -24,6 +40,8 @@ let Btn = styled.button`
 let Title = styled('h1')`
   color: white;
 `
+
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
@@ -49,6 +67,7 @@ type Props = {
 
 function Foo ({posts}: Props) {
   let [state, setState] = useState('')
+  const { data, error } = useSWR('https://jsonplaceholder.typicode.com/users', fetcher)
 
   function hello (str: string = 'hello'): string {
     window.alert(str)
@@ -70,6 +89,8 @@ function Foo ({posts}: Props) {
 
   return (
     <Layout>
+      {!data && !error ? <div>I am loadking</div> : false}
+      {data ? <div>{data[0].name}</div> : false}
       <Title>
         {state.length ? state : 'loading..' }
       </Title>

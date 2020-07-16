@@ -1,0 +1,16 @@
+.col {
+  box-sizing: border-box;
+  border: 1px solid green;
+  height: 75px;
+  width: 100%;
+}
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  padding: 1rem;
+}
+
+.editMode {
+  border: 1px dotted red;
+}
