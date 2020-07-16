@@ -2,12 +2,12 @@ import {FC} from 'react'
 import sass from './Column.module.scss'
 
 type IconProps = {
-  onClick: any
+  clickHandler: (event: React.MouseEvent<HTMLSpanElement>) => void
 }
 
-const CloseIcon: FC<IconProps> = ({onClick}) => {
+const CloseIcon: FC<IconProps> = ({clickHandler}) => {
   return (
-    <span onClick={onClick} className={sass.cancel}>
+    <span onClick={clickHandler} className={sass.cancel}>
       X
     </span>
   )

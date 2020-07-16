@@ -1,4 +1,4 @@
-import {FC, SyntheticEvent} from 'react'
+import {FC} from 'react'
 import CloseIcon from './CloseIcon'
 import sass from './Column.module.scss'
 
@@ -8,13 +8,13 @@ type ColumnProps = {
   order: number,
   editMode: boolean,
   content: string,
-  removeColumn: Function
+  removeColumn: any
 }
 
 const Column: FC<ColumnProps> = ({id, rowId, content, removeColumn}) => {
 
-  function handleClick (e: SyntheticEvent): void {
-    e.stopPropagation()
+  function handleClick (event:  React.MouseEvent<HTMLSpanElement>): void {
+    event.stopPropagation()
     if (removeColumn) {
       removeColumn({
         id: id,
@@ -25,7 +25,7 @@ const Column: FC<ColumnProps> = ({id, rowId, content, removeColumn}) => {
 
   return (
     <div className={sass.col}>
-      <CloseIcon onClick={handleClick} />
+      <CloseIcon clickHandler={handleClick} />
       {content}
     </div>
   )
