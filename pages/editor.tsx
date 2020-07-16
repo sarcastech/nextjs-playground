@@ -31,7 +31,7 @@ const Editor: FC = () => {
     setRows(newRows)
   }
 
-  function updateRow (id: number): Function {
+  function updateRow (id: number): VoidFunction {
     return function (): void {
       let  _rows: RowModel[] = rows.slice()
       let matchIndex = _rows.findIndex(row => {
@@ -48,7 +48,7 @@ const Editor: FC = () => {
     }
   }
 
-  function removeRow (id: number): Function {
+  function removeRow (id: number): VoidFunction {
     return function (): void {
       let newRows = rows.filter((row: RowModel) => {
         return row.id !== id
@@ -73,7 +73,7 @@ const Editor: FC = () => {
   }
 
   function removeColumn (col: ColModel): void {
-   let _rows: RowModel[] = rows.slice()
+    let _rows: RowModel[] = rows.slice()
     let matchIndex = _rows.findIndex(row => {
       return row.id === col.rowId
     })

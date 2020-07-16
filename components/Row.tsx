@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import {FC, useState } from 'react'
 import Column from './Column'
 import ColumnInterface from '../interfaces/Column'
 import sass from './Rows.module.scss'
@@ -8,9 +8,9 @@ type RowProps = {
   order: number,
   editMode: boolean,
   columns: ColumnInterface[],
-  onUpdate: any,
-  removeColumn: any,
-  removeRow: any
+  onUpdate: VoidFunction,
+  removeColumn: Function,
+  removeRow: VoidFunction
 }
 
 const Row: FC<RowProps> = ({id, columns, onUpdate, removeColumn, removeRow}) => {
